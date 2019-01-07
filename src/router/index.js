@@ -5,13 +5,18 @@ import Home from "../components/home";
 import User from "../components/user";
 import ErrorPage from "../components/Error";
 
-const Routes = () =>
+/**
+ * @description Request to the  API to signup a user
+ * @return {object} Router component
+ */
+const Routes = () => (
   <Router>
     <Switch>
-      <Route exact path='/' component={Home}></Route>
-      <Route exact path='/user' component={User}></Route>
-      <Route exact path='*' component={ErrorPage}></Route>
+      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/user" component={User}></Route>
+      <Route exact path="*" component={ErrorPage}></Route>
     </Switch>
   </Router>
+);
 
 export default Routes;
