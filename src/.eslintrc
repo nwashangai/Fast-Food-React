@@ -30,6 +30,11 @@
     "no-param-reassign": 0,
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
+    "class-methods-use-this": ["error", { "exceptMethods": ["render"] }],
+    "react/self-closing-comp": ["error", {
+      "component": false,
+      "html": false
+    }],
     "max-nested-callbacks": [2, 10],
     "import/no-unresolved": [2, { "commonjs": true }],
     "valid-jsdoc": ["error", {
