@@ -7,9 +7,9 @@ import { login } from '../../actions/authAction';
 import Utilities from '../../utils';
 
 /**
- * Class representing Footer
- * @class Footer
- * @description handle Footer component
+ * Class representing Header
+ * @class Header
+ * @description handle Header component
  */
 class Header extends Component {
   /**

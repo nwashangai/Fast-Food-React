@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Signup from "./Signup";
 import Alert from "../Alert";
 
+import '../../../assets/css/style.css';
 /**
  * Class representing Home
  * @class Home

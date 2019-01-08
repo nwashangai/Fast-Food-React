@@ -13,7 +13,7 @@ const initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
   case ADD_USER:
-    return { ...state, user: action };
+    return { ...state, user: action.payload };
   default:
     return state;
   }

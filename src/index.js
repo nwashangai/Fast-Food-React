@@ -5,7 +5,6 @@ import Routes from './router';
 import store from './store';
 
 import '../assets/js';
-import '../assets/css/style.css';
 import '../assets/css/modal.css';
 
 ReactDOM.render(
