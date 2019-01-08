@@ -10,7 +10,7 @@ import { ADD_USER } from '../types';
  */
 export const setUser = user => ({
   type: ADD_USER,
-  user
+  payload: user
 });
 
 /**
