@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
 import Alert from "../Alert";
 import Header from "./Header";
 import Footer from "../home/Footer";
+import Cat from "./Cat";
+import Profile from "./Profile";
+import Main from "./main";
 
 /**
  * Class representing Users
@@ -26,7 +30,20 @@ class User extends Component {
       props.history.push('/');
     }
 
-    this.state = {};
+    this.state = {
+      init: false,
+    };
+  }
+
+  /**
+  * execute after load
+  * @return {Object} null - returns notthing
+  * @memberof User
+ */
+  componentDidMount() {
+    document.getElementById('food-content').style.display = 'block';
+    document.getElementById('food-tab').className += ' active';
+    this.setState({ init: true });
   }
 
   /**
@@ -38,7 +55,12 @@ class User extends Component {
     return (
       <div>
         <Header/>
-        <h1>Welcome</h1>
+        <section id="main">
+          <div className="container">
+            {(this.props.user.isAdmin) ? <Profile/> : <Cat/>}
+            <Main/>
+          </div>
+        </section>
         <div id="loader"></div>
         <Alert/>
         <Footer/>
@@ -47,6 +69,7 @@ class User extends Component {
   }
 }
 User.propTypes = {
+  user: PropTypes.object,
   history: PropTypes.object
 
 };

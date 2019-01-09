@@ -5,7 +5,7 @@ const initialState = {
 };
 
 /**
- * @description Request to the  API to signup a user
+ * @description Reducer to signup a user
  * @param {object} state - initial state
  * @param {object} action - action dispatched
  * @return {object} current state

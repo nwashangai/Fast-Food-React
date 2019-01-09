@@ -32,7 +32,7 @@ export const register = userData => async dispatch => {
       return response.data;
     }
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({ status: 'error', message: error.response.message });
   }
 };
 

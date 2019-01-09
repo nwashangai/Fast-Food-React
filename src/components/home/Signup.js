@@ -52,11 +52,19 @@ class Signup extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (Utilities.formValid(this.state, 1)) {
-      const response = await this.props.register(this.state);
-      if (response.status === 'error') {
-        Utilities.alert('Error', response.message);
-      } else {
-        this.props.history.push('/user');
+      try {
+        Utilities.loader("block");
+        const response = await this.props.register(this.state);
+        if (response.status === 'error') {
+          Utilities.loader("none");
+          Utilities.alert('Error', response.message);
+        } else {
+          Utilities.loader("none");
+          this.props.history.push('/user');
+        }
+      } catch (error) {
+        Utilities.loader("none");
+        Utilities.alert('Error', error.message);
       }
     }
   }
