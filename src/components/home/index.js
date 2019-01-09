@@ -22,7 +22,6 @@ class Home extends Component {
       <div>
         <Header/>
         <Signup/>
-        <div id="loader"></div>
         <Alert/>
         <Footer/>
       </div>

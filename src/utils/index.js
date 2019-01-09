@@ -26,7 +26,7 @@ class Utilities {
   * @memberof Utilities
  */
   static formValid(data, mode) {
-    const phone = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g;
+    const phone = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/g;
     switch (mode) {
     case 1:
       if (!validator.isAlpha(data.name)) {
@@ -77,6 +77,36 @@ class Utilities {
  */
   static alert(status, message) {
     this.popup(status, message);
+  }
+
+  /**
+  * Loader box
+  * @param {String} active - laoder state
+  * @return {null} null - No response
+  * @memberof Utilities
+ */
+  static loader(active) {
+    document.getElementById("loader").style.display = active;
+  }
+
+  /**
+ * Navigate tabs
+ * @param {Event} event triggered event
+ * @param {String} tab tab to open
+  * @return {null} null - returns nothing
+ */
+  static openTab(event, tab) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName('tab-contents');
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = 'none';
+    }
+    tablinks = document.getElementsByClassName('tablinks');
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(' active', '');
+    }
+    document.getElementById(tab).style.display = 'block';
+    event.currentTarget.className += ' active';
   }
 }
 
