@@ -106,7 +106,7 @@ class Main extends Component {
              <i className="fa fa-angle-right right"></i>
            </div>
          </h1>
-         <Menu menuList={this.state.list}/>
+         <Menu menuList={this.state.list || []}/>
        </div>
      </article>
    );

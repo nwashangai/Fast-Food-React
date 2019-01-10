@@ -25,7 +25,7 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
-      },{
+      }, {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: {
           loader: 'file-loader?name=/assets/images/[name].[ext]',
@@ -34,7 +34,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlwebpackPlugin ({
+    new HtmlwebpackPlugin({
       template: './src/index.html'
     }),
     new Dotenv()
@@ -42,4 +42,4 @@ module.exports = {
   devServer: {
     historyApiFallback: true
   }
-}
+};
