@@ -62,6 +62,13 @@ class Utilities {
       }
       break;
 
+    case 3:
+      if (data.trim() === '') {
+        this.popup('Error', 'please provide your address');
+        return false;
+      }
+      break;
+
     default:
       break;
     }
@@ -82,11 +89,20 @@ class Utilities {
   /**
   * Loader box
   * @param {String} active - laoder state
-  * @return {null} null - No response
+  * @return {null} null - No return
   * @memberof Utilities
  */
   static loader(active) {
     document.getElementById("loader").style.display = active;
+  }
+
+  /**
+  * close make order
+  * @return {null} null - No return
+  * @memberof Utilities
+ */
+  static closeOrder() {
+    document.getElementById('order-food').style.display = 'none';
   }
 
   /**

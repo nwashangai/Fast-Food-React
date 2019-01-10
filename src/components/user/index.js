@@ -7,6 +7,7 @@ import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
 import Alert from "../Alert";
 import Header from "./Header";
+import PlaceOrder from "./PlaceOrder";
 import Footer from "../home/Footer";
 import Cat from "./Cat";
 import Profile from "./Profile";
@@ -61,6 +62,7 @@ class User extends Component {
             <Main/>
           </div>
         </section>
+        <PlaceOrder/>
         <div id="loader"></div>
         <Alert/>
         <Footer/>

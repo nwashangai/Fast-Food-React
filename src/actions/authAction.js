@@ -26,13 +26,15 @@ export const register = userData => async dispatch => {
     } else {
       const { token } = response.data.data;
       localStorage.setItem('token-key', token);
+      request.defaults.headers.get['x-access-token'] = token;
+      request.defaults.headers.post['x-access-token'] = token;
       const user = jwtDecode(token);
       response.data.isAdmin = user.isAdmin;
       dispatch(setUser(response.data.data));
       return response.data;
     }
   } catch (error) {
-    return ({ status: 'error', message: error.response.message });
+    return ({ status: 'error', message: error.message });
   }
 };
 
@@ -50,6 +52,7 @@ export const login = userData => async dispatch => {
       const { token } = response.data;
       localStorage.setItem('token-key', token);
       request.defaults.headers.get['x-access-token'] = token;
+      request.defaults.headers.post['x-access-token'] = token;
       const res = await request.get('user');
       const decoded = jwtDecode(token);
       res.data.data.isAdmin = decoded.isAdmin;

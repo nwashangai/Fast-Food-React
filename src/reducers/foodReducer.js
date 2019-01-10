@@ -1,7 +1,5 @@
 import { ADD_MENU } from '../types';
 
-// const initialState = [];
-
 /**
  * @description Reducer to add Food Menu
  * @param {object} state - initial state
