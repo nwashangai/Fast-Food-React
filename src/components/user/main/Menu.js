@@ -19,6 +19,8 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.fallBack = this.fallBack.bind(this);
   }
 
   /**
@@ -28,6 +30,17 @@ class Menu extends Component {
    * @memberof Menu
    */
   findItem = id => this.props.menuList.find(item => item.id === id);
+
+  /**
+   * fallback image
+   * @param {Event} event
+   * @return {Array} null nothing
+   * @memberof Menu
+   */
+  fallBack = event => {
+    console.log(event.src);
+    event.src = "./assets/images/image.png";
+  };
 
   /**
    * Add to cat item
@@ -41,7 +54,7 @@ class Menu extends Component {
     this.props.cat.forEach(item => {
       if (item.foodId === id) {
         const food = this.findItem(id);
-        this.props.update(food.id, '+');
+        this.props.update(food.id, "+");
         // item.subTotal = parseFloat(food.price) * parseInt(item.quantity, 10);
         track = 1;
       }
@@ -70,7 +83,10 @@ class Menu extends Component {
         {this.props.menuList.map(food => (
           <li key={food.id}>
             <span className="my-food">
-              <img src={food.image} alt={food.category} />
+              <img
+                src={food.image || "./assets/images/image.png"}
+                alt={food.category}
+              />
             </span>
             <span className="in-text">
               <h3>{food.name}</h3>

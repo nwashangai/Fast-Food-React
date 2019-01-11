@@ -1,7 +1,8 @@
 import jwtDecode from 'jwt-decode';
 
+import { getOrders } from './orderAction';
 import { request } from '../config';
-import { ADD_USER } from '../types';
+import { ADD_USER, LOGOUT } from '../types';
 
 /**
  * @description set User
@@ -11,6 +12,14 @@ import { ADD_USER } from '../types';
 export const setUser = user => ({
   type: ADD_USER,
   payload: user
+});
+
+/**
+ * @description Unset User
+ * @return {object} redux action dispatched
+ */
+export const logoutUser = () => ({
+  type: LOGOUT,
 });
 
 /**
@@ -26,8 +35,6 @@ export const register = userData => async dispatch => {
     } else {
       const { token } = response.data.data;
       localStorage.setItem('token-key', token);
-      request.defaults.headers.get['x-access-token'] = token;
-      request.defaults.headers.post['x-access-token'] = token;
       const user = jwtDecode(token);
       response.data.isAdmin = user.isAdmin;
       dispatch(setUser(response.data.data));
@@ -51,16 +58,40 @@ export const login = userData => async dispatch => {
     } else {
       const { token } = response.data;
       localStorage.setItem('token-key', token);
-      request.defaults.headers.get['x-access-token'] = token;
-      request.defaults.headers.post['x-access-token'] = token;
       const res = await request.get('user');
       const decoded = jwtDecode(token);
+      dispatch(getOrders(decoded.userId));
       res.data.data.isAdmin = decoded.isAdmin;
       res.data.data.id = decoded.userId;
       res.data.data.token = token;
       dispatch(setUser(res.data.data));
       return res.data;
     }
+  } catch (error) {
+    return ({ status: 'error', message: error.message });
+  }
+};
+
+/**
+ * Logout User
+ * @return {object} redux action dispatched
+ */
+export const logout = () => dispatch => {
+  window.localStorage.removeItem("token-key");
+  dispatch(logoutUser());
+};
+
+/**
+ * Get User
+ * @return {object} redux action dispatched
+ */
+export const getUser = () => async dispatch => {
+  try {
+    const res = await request.get('user');
+    const decoded = jwtDecode(localStorage.getItem('token-key'));
+    dispatch(setUser(res.data.data));
+    dispatch(getOrders(decoded.userId));
+    return ({ status: 'success', message: true });
   } catch (error) {
     return ({ status: 'error', message: error.message });
   }

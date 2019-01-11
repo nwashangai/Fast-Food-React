@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Utilities from '../../../utils';
 import { menu } from '../../../actions/foodAction';
 import Menu from "./Menu";
+import Orders from "./Orders";
 
 /**
  * Class representing Main
@@ -108,6 +109,7 @@ class Main extends Component {
          </h1>
          <Menu menuList={this.state.list || []}/>
        </div>
+       <Orders/>
      </article>
    );
  }
