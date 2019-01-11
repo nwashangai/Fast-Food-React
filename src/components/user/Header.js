@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import Utilities from "../../utils";
+import { logout } from "../../actions/authAction";
 
 /**
  * Class representing Header
@@ -10,38 +13,61 @@ import { withRouter } from 'react-router-dom';
  */
 class Header extends Component {
   /**
-  * Class Constructor
-  * @param {Object} props - Props Object
-  * @return {null} null - returns nothing
- */
+   * Class Constructor
+   * @param {Object} props - Props Object
+   * @return {null} null - returns nothing
+   */
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.logout = this.logout.bind(this);
   }
 
   /**
-  * Render component
-  * @return {Object} component - returns a component
-  * @memberof Header
- */
+   * logs user out
+   * @return {null} No return
+   * @memberof Menu
+   */
+  logout = () => {
+    this.props.logout();
+    this.props.history.push("/");
+  };
+
+  /**
+   * Render component
+   * @return {Object} component - returns a component
+   * @memberof Header
+   */
   render() {
+    /* eslint-disable no-restricted-globals */
     return (
       <section id="nav-bar">
         <div className="container">
-          <h1>Welcome <span id="user-first-name">
-            {this.props.user.name}
-          </span>!</h1>
+          <h1>
+            Welcome <span id="user-first-name">{this.props.user.name}</span>!
+          </h1>
           <form>
             <nav>
               <ul className="tabs">
-                <li id="food-tab" className="tablinks">
-                  <i className="fa fa-cutlery"></i> Foods
+                <li
+                  id="food-tab"
+                  className="tablinks"
+                  onClick={event => Utilities.openTab(event, "food-content")}
+                >
+                  <i className="fa fa-cutlery" /> Foods
                 </li>
-                <li id="order-tab" className="tablinks">
-                  <i className="fa fa-file-text"></i> Order History
+                <li
+                  id="order-tab"
+                  className="tablinks"
+                  onClick={event => Utilities.openTab(event, "order-content")}
+                >
+                  <i className="fa fa-file-text" /> Order History
                 </li>
-                <li id="order-tab" className="tablinks">
-                  <i className="fa fa-sign-out"></i> Logout
+                <li id="order-tab" className="tablinks"
+                  onClick={() => this.logout()}>
+                  <i className="fa fa-sign-out" />{" "}
+                  Logout
                 </li>
               </ul>
             </nav>
@@ -49,13 +75,15 @@ class Header extends Component {
         </div>
       </section>
     );
+    /* eslint-enable no-nested-ternary */
   }
 }
 Header.propTypes = {
+  user: PropTypes.object,
+  logout: PropTypes.func.isRequired,
   history: PropTypes.object
-
 };
-const mapStateToProps = (state) => ({
-  user: state.AuthReducer.user,
+const mapStateToProps = state => ({
+  user: state.AuthReducer.user
 });
-export default withRouter(connect(mapStateToProps)(Header));
+export default withRouter(connect(mapStateToProps, { logout })(Header));

@@ -43,7 +43,6 @@ class PlaceOrder extends Component {
    * @return {null} null - returns nothing
    */
   sendOrder = async () => {
-    console.log(this.state.address);
     if (Utilities.formValid(this.state.address, 3)) {
       const myOrder = {
         address: this.state.address,

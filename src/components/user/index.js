@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
+import { logout, getUser } from "../../actions/authAction";
 import Alert from "../Alert";
 import Header from "./Header";
 import PlaceOrder from "./PlaceOrder";
@@ -26,9 +28,16 @@ class User extends Component {
  */
   constructor(props) {
     super(props);
-    const { user } = props;
-    if (!user.token) {
+    if (!window.localStorage.getItem('token-key')) {
       props.history.push('/');
+    } else {
+      try {
+        jwtDecode(window.localStorage.getItem('token-key'));
+        this.props.getUser();
+      } catch (error) {
+        props.logout();
+        props.history.push('/');
+      }
     }
 
     this.state = {
@@ -72,6 +81,8 @@ class User extends Component {
 }
 User.propTypes = {
   user: PropTypes.object,
+  logout: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   history: PropTypes.object
 
 };
@@ -79,4 +90,4 @@ const mapStateToProps = (state) => ({
   user: state.AuthReducer.user,
 });
 
-export default withRouter(connect(mapStateToProps)(User));
+export default withRouter(connect(mapStateToProps, { logout, getUser })(User));
