@@ -29,7 +29,7 @@ To start the server run
 ```
 npm start
 ```
-Kudos :+1: now your API server is running at http://localhost:4001/
+Kudos :+1: now your app is running at http://localhost:8080/
 
 ## Features
 * User can register.
