@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import logo from '../../../assets/images/emblem.png';
 
 import { login } from '../../actions/authAction';
 import Utilities from '../../utils';
@@ -78,7 +79,7 @@ class Header extends Component {
     } = this;
     return (
       <div className="topnav">
-        <h1><img src="./assets/images/emblem.png" alt="Snow" id="logo"/>
+        <h1><img src={logo} alt="Snow" id="logo"/>
         Fast Food Fast
         </h1>
         <form className="login" id="login-form">
