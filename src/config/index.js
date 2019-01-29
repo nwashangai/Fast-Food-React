@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const request = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: 'https://my-fast-food.herokuapp.com/api/v1/',
   headers: {
     'Content-Type': 'application/json',
     'x-access-token': window.localStorage.getItem('token-key'),

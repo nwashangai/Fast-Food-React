@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+import fallback from '../../../../assets/images/image.png';
 import { addItem, update } from "../../../actions/catAction";
 
 /**
@@ -39,7 +40,7 @@ class Menu extends Component {
    */
   fallBack = event => {
     console.log(event.src);
-    event.src = "./assets/images/image.png";
+    event.src = fallback;
   };
 
   /**
@@ -84,7 +85,7 @@ class Menu extends Component {
           <li key={food.id}>
             <span className="my-food">
               <img
-                src={food.image || "./assets/images/image.png"}
+                src={food.image || fallback}
                 alt={food.category}
               />
             </span>
