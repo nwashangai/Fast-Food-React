@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import Utilities from "../../utils";
 import { logout } from "../../actions/authAction";
 
 /**
@@ -11,7 +10,7 @@ import { logout } from "../../actions/authAction";
  * @class Header
  * @description handle Header component
  */
-class Header extends Component {
+export class Header extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
@@ -35,6 +34,17 @@ class Header extends Component {
   };
 
   /**
+   * switch tab
+   * @param {Object} path - route path
+   * @return {null} No return
+   * @memberof Menu
+   */
+  switchTab = (path) => {
+    this.props.history.push(path);
+    window.location.reload();
+  };
+
+  /**
    * Render component
    * @return {Object} component - returns a component
    * @memberof Header
@@ -53,14 +63,14 @@ class Header extends Component {
                 <li
                   id="food-tab"
                   className="tablinks"
-                  onClick={event => Utilities.openTab(event, "food-content")}
+                  onClick={() => this.switchTab('/user')}
                 >
                   <i className="fa fa-cutlery" /> Foods
                 </li>
                 <li
                   id="order-tab"
                   className="tablinks"
-                  onClick={event => Utilities.openTab(event, "order-content")}
+                  onClick={() => this.switchTab('/orders')}
                 >
                   <i className="fa fa-file-text" /> Order History
                 </li>

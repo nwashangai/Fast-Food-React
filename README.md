@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/nwashangai/Fast-Food-React.svg?branch=develop)](https://travis-ci.org/nwashangai/Fast-Food-React)
+[![Coverage Status](https://coveralls.io/repos/github/nwashangai/Fast-Food-React/badge.svg?branch=ch-setup-test-163583032)](https://coveralls.io/github/nwashangai/Fast-Food-React?branch=ch-setup-test-163583032)
+
 # Fast-Food-React
 Fast Food Fast React Application
 An online food ordering system which allow users register, login, order food online and have it delivered to your location.

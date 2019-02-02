@@ -7,20 +7,21 @@ import { withRouter } from 'react-router-dom';
 import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
 import { logout, getUser } from "../../actions/authAction";
-import Alert from "../Alert";
-import Header from "./Header";
-import PlaceOrder from "./PlaceOrder";
-import Footer from "../home/Footer";
-import Cat from "./Cat";
-import Profile from "./Profile";
+import AlertComponent from "../Alert";
+import HeaderComponent from "./Header";
+import PlaceOrderComponent from "./PlaceOrder";
+import FooterComponent from "../home/Footer";
+import CatComponent from "./Cat";
+import ProfileComponent from "./Profile";
 import Main from "./main";
+import Utilities from "../../utils";
 
 /**
  * Class representing Users
  * @class User
  * @description user component
  */
-class User extends Component {
+export class User extends Component {
 /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -39,9 +40,9 @@ class User extends Component {
         props.history.push('/');
       }
     }
-
     this.state = {
       init: false,
+      page: this.props.location.pathname
     };
   }
 
@@ -51,9 +52,21 @@ class User extends Component {
   * @memberof User
  */
   componentDidMount() {
-    document.getElementById('food-content').style.display = 'block';
-    document.getElementById('food-tab').className += ' active';
-    this.setState({ init: true });
+    const path = this.props.location.pathname;
+    if (path === '/orders') {
+      Utilities.selectTab('order-content');
+      document.getElementById('order-content').style.display = 'block';
+      document.getElementById('order-tab').className += ' active';
+      this.setState({ init: true });
+    } else {
+      Utilities.selectTab('food-tab');
+      document.getElementById('food-content').style.display = 'block';
+      document.getElementById('food-tab').className += ' active';
+      this.setState({ init: true });
+    }
+    if (path !== this.state.page) {
+      this.setState({ page: path }, this.forceUpdate());
+    }
   }
 
   /**
@@ -64,17 +77,17 @@ class User extends Component {
   render() {
     return (
       <div>
-        <Header/>
+        <HeaderComponent/>
         <section id="main">
           <div className="container">
-            {(this.props.user.isAdmin) ? <Profile/> : <Cat/>}
+            {(this.props.user.isAdmin) ? <ProfileComponent/> : <CatComponent/>}
             <Main/>
           </div>
         </section>
-        <PlaceOrder/>
+        <PlaceOrderComponent/>
         <div id="loader"></div>
-        <Alert/>
-        <Footer/>
+        <AlertComponent/>
+        <FooterComponent/>
       </div>
     );
   }
@@ -83,8 +96,8 @@ User.propTypes = {
   user: PropTypes.object,
   logout: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
-  history: PropTypes.object
-
+  history: PropTypes.object,
+  location: PropTypes.object
 };
 const mapStateToProps = (state) => ({
   user: state.AuthReducer.user,

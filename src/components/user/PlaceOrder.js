@@ -10,7 +10,7 @@ import { placeOrder } from "../../actions/orderAction";
  * @class PlaceOrder
  * @description handle PlaceOrder component
  */
-class PlaceOrder extends Component {
+export class PlaceOrder extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
@@ -118,6 +118,7 @@ class PlaceOrder extends Component {
             <br />
             <span>
               <input
+                id="send-order"
                 type="button"
                 onClick={() => this.sendOrder()}
                 value="PLACE ORDER"

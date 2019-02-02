@@ -5,7 +5,7 @@ import React, { Component } from 'react';
  * @class Profile
  * @description handle Profile component
  */
-class Profile extends Component {
+export class Profile extends Component {
   /**
   * Render component
   * @return {Object} component - returns a component
