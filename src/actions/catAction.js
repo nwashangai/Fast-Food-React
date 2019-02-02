@@ -1,4 +1,9 @@
-import { ADD_ITEM, UPDATE_ITEM, CLEAR_CAT } from '../types';
+import {
+  ADD_ITEM,
+  UPDATE_ITEM,
+  CLEAR_CAT,
+  DELETE_CART_ITEM
+} from '../types';
 
 /**
  * @description add to cat
@@ -30,6 +35,16 @@ export const updateItem = (id, action) => ({
 });
 
 /**
+ * @description delete foodItem from cat
+ * @param {object} id - food id
+ * @return {object} redux action dispatched
+ */
+export const deleteCartFood = (id) => ({
+  type: DELETE_CART_ITEM,
+  payload: id
+});
+
+/**
  * Decrease quantity of item by one
  * @param {object} item - fodd item to be added to cat
  * @return {object} redux action dispatched
@@ -46,6 +61,15 @@ export const addItem = (item) => dispatch => {
  */
 export const update = (id, action) => dispatch => {
   dispatch(updateItem(id, action));
+};
+
+/**
+ * Remove item from list
+ * @param {object} id - fodd id
+ * @return {null} no data returned
+ */
+export const deleteCartItem = (id) => dispatch => {
+  dispatch(deleteCartFood(id));
 };
 
 /**

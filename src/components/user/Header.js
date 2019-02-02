@@ -19,8 +19,17 @@ export class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.menuHide = React.createRef();
 
     this.logout = this.logout.bind(this);
+  }
+
+  toggleBar = () => {
+    if (this.menuHide.current.style.display === "none") {
+      this.menuHide.current.style.display = "block";
+    } else {
+      this.menuHide.current.style.display = "none";
+    }
   }
 
   /**
@@ -55,26 +64,30 @@ export class Header extends Component {
       <section id="nav-bar">
         <div className="container">
           <h1>
-            Welcome <span id="user-first-name">{this.props.user.name}</span>!
+            <i
+              onClick={() => this.toggleBar()}
+              id="bar" className="fa fa-bars"></i>
+            {' '} Welcome <span
+              id="user-first-name">{this.props.user.name}</span>!
           </h1>
           <form>
             <nav>
-              <ul className="tabs">
+              <ul className="tabs" ref={this.menuHide}>
                 <li
                   id="food-tab"
-                  className="tablinks"
+                  className="tablinks selected"
                   onClick={() => this.switchTab('/user')}
                 >
                   <i className="fa fa-cutlery" /> Foods
                 </li>
                 <li
                   id="order-tab"
-                  className="tablinks"
+                  className="tablinks selected"
                   onClick={() => this.switchTab('/orders')}
                 >
                   <i className="fa fa-file-text" /> Order History
                 </li>
-                <li id="order-tab" className="tablinks"
+                <li id="order-tab" className="tablinks selected"
                   onClick={() => this.logout()}>
                   <i className="fa fa-sign-out" />{" "}
                   Logout

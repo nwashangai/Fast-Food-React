@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Utilities from '../../utils';
 import { register } from '../../actions/authAction';
@@ -51,21 +52,24 @@ export class Signup extends Component {
  */
   async handleSubmit(event) {
     event.preventDefault();
-    if (Utilities.formValid(this.state, 1)) {
+    const validation = Utilities.formValid(this.state, 1);
+    if (validation.status) {
       try {
         Utilities.loader("block");
         const response = await this.props.register(this.state);
         if (response.status === 'error') {
           Utilities.loader("none");
-          Utilities.alert('Error', response.message);
+          toast(response.message);
         } else {
           Utilities.loader("none");
           this.props.history.push('/user');
         }
       } catch (error) {
         Utilities.loader("none");
-        Utilities.alert('Error', error.message);
+        toast(error.message);
       }
+    } else {
+      toast(validation.message);
     }
   }
 
@@ -113,10 +117,12 @@ export class Signup extends Component {
                 </p>
                 <p>
                   <input id="confirmPassword" name="confirmPassword"
-                    onChange={onChange} type="password" placeholder="comfirm password"/>
+                    onChange={onChange}
+                    type="password" placeholder="comfirm password"/>
                 </p>
                 <p>
-                  <input id="register" type="button" name="submit" value="SIGNUP"
+                  <input id="register"
+                    type="button" name="submit" value="SIGNUP"
                     onClick={handleSubmit}/>
                 </p>
               </form>

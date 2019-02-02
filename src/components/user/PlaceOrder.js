@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import Utilities from "../../utils";
 import { placeOrder } from "../../actions/orderAction";
@@ -43,7 +44,8 @@ export class PlaceOrder extends Component {
    * @return {null} null - returns nothing
    */
   sendOrder = async () => {
-    if (Utilities.formValid(this.state.address, 3)) {
+    const validation = Utilities.formValid(this.state.address, 3);
+    if (validation.status) {
       const myOrder = {
         address: this.state.address,
         foodItems: this.props.cat
@@ -53,16 +55,18 @@ export class PlaceOrder extends Component {
         const response = await this.props.placeOrder(myOrder);
         if (response.status === "error") {
           Utilities.loader("none");
-          Utilities.alert("Error", response.message);
+          toast(response.message);
         } else {
           Utilities.loader("none");
-          Utilities.alert("Success", response.message);
+          toast(response.message);
           document.getElementById('order-food').style.display = 'none';
         }
       } catch (error) {
         Utilities.loader("none");
-        Utilities.alert("Error", error.message);
+        toast(error.message);
       }
+    } else {
+      toast(validation.message);
     }
   };
 

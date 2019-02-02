@@ -158,9 +158,13 @@ aside#sidebar .profile p {
      width: 15%;
  }
 
- .ctr {
+ .ctr, .del {
      cursor: pointer;
  }
+
+ .del {
+  color: red;
+}
 
  .ctr:hover {
      font-weight: bold;
@@ -618,12 +622,18 @@ ul#food .price {
      color: #ffffff;
  }
 /* Media Queries */
+@media(max-width: 1181px) and (min-width: 400px) {
+  .page-title {
+    margin-bottom: 37px;
+  }
+}
 
 @media(max-width: 768px) {
     aside#sidebar {
         position: relative;
     }
-    article#main-col {
+    #nav-bar form {
+      margin-top: -65px;
     }
     header #branding,
     header nav,

@@ -25,6 +25,9 @@ export const menu = () => async dispatch => {
       return response.data;
     }
   } catch (error) {
-    return ({ status: 'error', message: error.response.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };

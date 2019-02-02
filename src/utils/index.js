@@ -30,49 +30,44 @@ class Utilities {
     switch (mode) {
     case 1:
       if (!validator.isAlpha(data.name)) {
-        this.popup("Error", "invalid name");
-        return false;
+        return { status: false, message: 'name should be alphabets only' };
       }
       if (!validator.isEmail(data.email)) {
-        this.popup("Error", "invalid email");
-        return false;
+        return { status: false, message: 'email should be a valid email' };
       }
-      if (phone.test(data.phone) && data.phone.length < 9) {
-        this.popup("Error", "incorrect phone number");
-        return false;
+      if (!phone.test(data.phone) || data.phone.length < 11) {
+        return { status: false, message: 'phone number should be 11 digits' };
       }
       if (data.password.trim().length < 5) {
-        this.popup("Error", "password should not be less than 5 characters");
-        return false;
+        return {
+          status: false,
+          message: 'password should not be less than 5 characters'
+        };
       }
       if (data.password !== data.confirmPassword) {
-        this.popup("Error", "password does not match");
-        return false;
+        return { status: false, message: 'password does not match' };
       }
       break;
 
     case 2:
       if (!validator.isEmail(data.email)) {
-        this.popup("Error", "invalid email");
-        return false;
+        return { status: false, message: 'email should be a valid email' };
       }
       if (data.password.trim().length < 1) {
-        this.popup("Error", "provide password for login");
-        return false;
+        return { status: false, message: 'provide password for login' };
       }
       break;
 
     case 3:
       if (data.trim() === "") {
-        this.popup("Error", "please provide your address");
-        return false;
+        return { status: false, message: 'please provide your address' };
       }
       break;
 
     default:
       break;
     }
-    return true;
+    return { status: true, message: 'success' };
   }
 
   /**

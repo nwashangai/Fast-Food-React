@@ -3,6 +3,8 @@ import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
@@ -13,7 +15,7 @@ import PlaceOrderComponent from "./PlaceOrder";
 import FooterComponent from "../home/Footer";
 import CatComponent from "./Cat";
 import ProfileComponent from "./Profile";
-import Main from "./main";
+import MainComponent from "./main";
 import Utilities from "../../utils";
 
 /**
@@ -81,13 +83,14 @@ export class User extends Component {
         <section id="main">
           <div className="container">
             {(this.props.user.isAdmin) ? <ProfileComponent/> : <CatComponent/>}
-            <Main/>
+            <MainComponent/>
           </div>
         </section>
         <PlaceOrderComponent/>
         <div id="loader"></div>
         <AlertComponent/>
         <FooterComponent/>
+        <ToastContainer/>
       </div>
     );
   }

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { toast } from 'react-toastify';
 
-import Utilities from "../../utils";
-import { update, clearCat } from "../../actions/catAction";
+import { update, clearCat, deleteCartItem } from "../../actions/catAction";
 /**
  * Class representing Cat
  * @class Cat
@@ -29,7 +29,7 @@ export class Cat extends Component {
     if (this.props.cat.length > 0) {
       document.getElementById('order-food').style.display = 'block';
     } else {
-      Utilities.popup("Error", "please select a food item");
+      toast("please select a food item");
     }
   };
 
@@ -39,7 +39,7 @@ export class Cat extends Component {
    * @memberof Cat
    */
   render() {
-    const { update, clearCat } = this.props;
+    const { update, clearCat, deleteCartItem } = this.props;
     return (
       <aside id="sidebar">
         <div className="dark" id="user-cart">
@@ -74,6 +74,12 @@ export class Cat extends Component {
           <span id="cart-content">
             {this.props.cat.map(element => (
               <p key={element.foodId}>
+                <span
+                  className="del"
+                  onClick={() => deleteCartItem(element.foodId)}
+                >
+                  <i className="fa fa-trash-o"></i>
+                </span>{" "}
                 <span>{element.name}</span>
                 <span className="cart-price">
                   <span className="cart-currency"> ₦</span>
@@ -84,7 +90,7 @@ export class Cat extends Component {
                     className="ctr"
                     onClick={() => update(element.foodId, "-")}
                   >
-                    -{" "}
+                    <i className="fa fa-minus-circle"></i>{" "}
                   </span>
                   {element.quantity}
                   <span
@@ -92,7 +98,7 @@ export class Cat extends Component {
                     onClick={() => update(element.foodId, "+")}
                   >
                     {" "}
-                    +
+                    <i className="fa fa-plus-circle"></i>
                   </span>
                 </span>
               </p>
@@ -121,6 +127,7 @@ Cat.propTypes = {
   cat: PropTypes.array,
   clearCat: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
+  deleteCartItem: PropTypes.func.isRequired,
   history: PropTypes.object
 };
 
@@ -131,6 +138,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { update, clearCat }
+    { update, clearCat, deleteCartItem }
   )(Cat)
 );
