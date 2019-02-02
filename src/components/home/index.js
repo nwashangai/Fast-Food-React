@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import HeaderComponent from "./Header";
 import FooterComponent from "./Footer";
@@ -28,7 +30,6 @@ export class Home extends Component {
       toggle: true
     };
     if (window.localStorage.getItem('token-key')) {
-      console.log('yes');
       props.history.push('/user');
     }
   }
@@ -49,6 +50,7 @@ export class Home extends Component {
         <SignupComponent toggle={this.state.toggle}/>
         <AlertComponent/>
         <FooterComponent/>
+        <ToastContainer/>
       </div>
     );
   }

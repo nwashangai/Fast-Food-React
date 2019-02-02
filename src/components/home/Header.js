@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { login } from '../../actions/authAction';
 import Utilities from '../../utils';
@@ -70,21 +71,24 @@ export class Header extends Component {
  */
   async handleSubmit(event) {
     event.preventDefault();
-    if (Utilities.formValid(this.state, 2)) {
+    const validation = Utilities.formValid(this.state, 2);
+    if (validation.status) {
       try {
         Utilities.loader("block");
         const response = await this.props.login(this.state);
         if (response.status === 'error') {
           Utilities.loader("none");
-          Utilities.alert('Error', response.message);
+          toast(response.message);
         } else {
           Utilities.loader("none");
           this.props.history.push('/user');
         }
       } catch (error) {
         Utilities.loader("none");
-        Utilities.alert('Error', error.message);
+        toast(error.message);
       }
+    } else {
+      toast(validation.message);
     }
   }
 
@@ -101,12 +105,22 @@ export class Header extends Component {
     return (
       <div className="topnav">
         <h1>
-          <i onClick={() => this.toggleBar()} id="bar" className="fa fa-bars"></i>
+          <i
+            onClick={() => this.toggleBar()}
+            id="bar"
+            className="fa fa-bars"
+          ></i>
           {' '}Fast Food Fast
         </h1>
         <ul className="menu-data" ref={this.menuHide}>
-          <li className="selected" id="login-toggle" onClick={() => this.loginUser()}>LOGIN</li>
-          <li className="selected" id="signup-toggle" onClick={() => this.signup()}>SIGNUP</li>
+          <li
+            className="selected"
+            id="login-toggle"
+            onClick={() => this.loginUser()}>LOGIN</li>
+          <li
+            className="selected"
+            id="signup-toggle"
+            onClick={() => this.signup()}>SIGNUP</li>
         </ul>
         <form className="login" id="login-form" ref={this.hideLogin}>
           <span className="my-login small">

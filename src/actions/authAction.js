@@ -41,7 +41,10 @@ export const register = userData => async dispatch => {
       return response.data;
     }
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };
 
@@ -68,7 +71,10 @@ export const login = userData => async dispatch => {
       return res.data;
     }
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };
 
@@ -95,6 +101,9 @@ export const getUser = () => async dispatch => {
     dispatch(getOrders(decoded.userId));
     return ({ status: 'success', message: true });
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };

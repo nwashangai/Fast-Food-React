@@ -73,17 +73,17 @@ export class Order extends Component {
               <div key={element.id} className="table-row">
                 <div className="table-body-cell  cell-11">
                   <span className="small-display">#id :</span>{" "}
-                  <span className="data">${index}</span>
+                  <span className="data">{index + 1}</span>
                 </div>
                 <div className="table-body-cell cell-12">
                   <span className="small-display"> Name: </span>
                   <span className="data">
-                    ${new Date(element.date).toLocaleString()}
+                    {new Date(element.date).toLocaleString()}
                   </span>
                 </div>
                 <div className="table-body-cell cell-13">
                   <span className="small-display"> Address: </span>
-                  <span className="data">${element.address}</span>
+                  <span className="data">{element.address}</span>
                 </div>
                 <div className="table-body-cell cell-14">
                   <span className="small-display"> Food: </span>

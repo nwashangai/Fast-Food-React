@@ -34,7 +34,10 @@ export const placeOrder = (order) => async dispatch => {
       return ({ status: 'success', message: 'Order sent successfully' });
     }
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };
 
@@ -53,6 +56,9 @@ export const getOrders = (id) => async dispatch => {
       return (response.data);
     }
   } catch (error) {
-    return ({ status: 'error', message: error.message });
+    return ({
+      status: 'error',
+      message: error.response ? error.response.data.message : error.message
+    });
   }
 };

@@ -3,6 +3,7 @@ export const ADD_MENU = 'ADD_MENU';
 export const ADD_ITEM = 'ADD_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const CLEAR_CAT = 'CLEAR_CAT';
+export const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
 export const ADD_ORDER = 'ADD_ORDER';
 export const LOGOUT = 'LOGOUT';
 export default ADD_USER;

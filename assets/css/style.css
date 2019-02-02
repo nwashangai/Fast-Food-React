@@ -125,6 +125,10 @@
           display: none;
         }
 
+        .tabs {
+          display: inline;
+        }
+
         .login {
             padding-right: 5px;
         }
@@ -375,11 +379,11 @@
               padding-top: 37% !important;
               padding-bottom: 37%;
             }
-            .menu-data {
+            .menu-data, .tabs {
               display: none;
               margin-top: 20%;
             }
-            .menu-data > li {
+            .menu-data > li, .tabs > li {
               float: left;
               display: block;
               color: #f2f2f2;
