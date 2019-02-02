@@ -3,7 +3,7 @@ const Dotenv = require('dotenv-webpack');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/index.js'],
+  entry: ['@babel/polyfill', './src/index.js'],
   output: {
     path: path.join(__dirname, '/build'),
     filename: 'index_bundle.js'
@@ -16,7 +16,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           query: {
-            presets: ['env', 'react', 'stage-0']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       }, {

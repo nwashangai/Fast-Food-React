@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import Utilities from '../../../utils';
 import { menu } from '../../../actions/foodAction';
-import Menu from "./Menu";
+import MenuComponent from "./Menu";
 import Orders from "./Orders";
 
 /**
@@ -13,7 +13,7 @@ import Orders from "./Orders";
  * @class Main
  * @description handle Main component
  */
-class Main extends Component {
+export class Main extends Component {
   /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -107,7 +107,7 @@ class Main extends Component {
              <i className="fa fa-angle-right right"></i>
            </div>
          </h1>
-         <Menu menuList={this.state.list || []}/>
+         <MenuComponent menuList={this.state.list || []}/>
        </div>
        <Orders/>
      </article>

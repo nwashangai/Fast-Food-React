@@ -11,7 +11,7 @@ import { register } from '../../actions/authAction';
  * @class Signup
  * @description handle Signup component
  */
-class Signup extends Component {
+export class Signup extends Component {
   /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -80,9 +80,9 @@ class Signup extends Component {
       onChange
     } = this;
     return (
-      <div id="background">
+      <div id="background" className={(!this.props.toggle) ? "hide" : ""}>
         <div className="row" id="overlay">
-          <div className="leftcolumn">
+          <div className="leftcolumn" id="home-text">
             <div className="card main-card">
               <h1>Kitchen for all</h1>
               <h5>Don't wait</h5>
@@ -109,14 +109,14 @@ class Signup extends Component {
                 </p>
                 <p>
                   <input id="spassword" name="password"
-                    onChange={onChange} type="password" placeholder="******"/>
+                    onChange={onChange} type="password" placeholder="password"/>
                 </p>
                 <p>
                   <input id="confirmPassword" name="confirmPassword"
-                    onChange={onChange} type="password" placeholder="******"/>
+                    onChange={onChange} type="password" placeholder="comfirm password"/>
                 </p>
                 <p>
-                  <input type="button" name="submit" value="SIGNUP"
+                  <input id="register" type="button" name="submit" value="SIGNUP"
                     onClick={handleSubmit}/>
                 </p>
               </form>
@@ -130,7 +130,8 @@ class Signup extends Component {
 
 Signup.propTypes = {
   register: PropTypes.func.isRequired,
-  history: PropTypes.object
+  history: PropTypes.object,
+  toggle: PropTypes.bool
 
 };
 export default withRouter(connect(null, { register })(Signup));

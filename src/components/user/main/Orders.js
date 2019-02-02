@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import ViewOrder from "./ViewOrder";
+import ViewOrderComponent from "./ViewOrder";
 /**
  * Class representing Order
  * @class Order
  * @description handle Order component
  */
-class Order extends Component {
+export class Order extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
@@ -110,7 +110,7 @@ class Order extends Component {
           </div>
         </div>
         <span id="no-item" />
-        <ViewOrder item={this.state.list || []} />
+        <ViewOrderComponent item={this.state.list || []} />
       </div>
     );
     /* eslint-enable no-nested-ternary */

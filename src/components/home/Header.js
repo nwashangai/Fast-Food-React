@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import logo from '../../../assets/images/emblem.png';
 
 import { login } from '../../actions/authAction';
 import Utilities from '../../utils';
@@ -12,7 +11,7 @@ import Utilities from '../../utils';
  * @class Header
  * @description handle Header component
  */
-class Header extends Component {
+export class Header extends Component {
   /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -24,6 +23,8 @@ class Header extends Component {
       email: '',
       password: '',
     };
+    this.menuHide = React.createRef();
+    this.hideLogin = React.createRef();
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,6 +40,26 @@ class Header extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  toggleBar = () => {
+    if (this.menuHide.current.style.display === "none") {
+      this.menuHide.current.style.display = "block";
+    } else {
+      this.menuHide.current.style.display = "none";
+    }
+  }
+
+  loginUser = () => {
+    this.menuHide.current.style.display = "none";
+    this.props.toggleReg(false);
+    this.hideLogin.current.style.display = "block";
+  }
+
+  signup = () => {
+    this.menuHide.current.style.display = "none";
+    this.hideLogin.current.style.display = "none";
+    this.props.toggleReg(true);
   }
 
   /**
@@ -79,10 +100,15 @@ class Header extends Component {
     } = this;
     return (
       <div className="topnav">
-        <h1><img src={logo} alt="Snow" id="logo"/>
-        Fast Food Fast
+        <h1>
+          <i onClick={() => this.toggleBar()} id="bar" className="fa fa-bars"></i>
+          {' '}Fast Food Fast
         </h1>
-        <form className="login" id="login-form">
+        <ul className="menu-data" ref={this.menuHide}>
+          <li className="selected" id="login-toggle" onClick={() => this.loginUser()}>LOGIN</li>
+          <li className="selected" id="signup-toggle" onClick={() => this.signup()}>SIGNUP</li>
+        </ul>
+        <form className="login" id="login-form" ref={this.hideLogin}>
           <span className="my-login small">
             <input id="lemail" name="email"
               onChange={onChange} type="email" placeholder="email"
@@ -103,9 +129,9 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  login: PropTypes.func.isRequired,
-  history: PropTypes.object
-
+  toggleReg: PropTypes.func.isRequired,
+  login: PropTypes.func,
+  history: PropTypes.object,
 };
 
 export default withRouter(connect(null, { login })(Header));

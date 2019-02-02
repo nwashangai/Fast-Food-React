@@ -1,6 +1,10 @@
 import { ADD_ITEM, UPDATE_ITEM, CLEAR_CAT } from "../types";
 
-const cat = [];
+const retrievedData = localStorage.getItem('user-cart');
+const cat = (retrievedData) ?
+  JSON.parse(retrievedData) :
+  [];
+console.log(JSON.parse(retrievedData));
 let updated;
 /**
  * @description Reducer to add item to cat
@@ -12,6 +16,7 @@ let updated;
 const CatReducer = (state = cat, action) => {
   switch (action.type) {
   case ADD_ITEM:
+    localStorage.setItem('user-cart', JSON.stringify([...state, action.payload]));
     return [...state, action.payload];
   case UPDATE_ITEM:
     updated = state.map(element => {
@@ -27,8 +32,10 @@ const CatReducer = (state = cat, action) => {
       }
       return element;
     });
+    localStorage.setItem('user-cart', JSON.stringify(updated));
     return [...updated];
   case CLEAR_CAT:
+    localStorage.setItem('user-cart', JSON.stringify([]));
     return [];
   default:
     return state;

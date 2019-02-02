@@ -5,7 +5,7 @@ import React, { Component } from 'react';
  * @class Footer
  * @description handle Footer component
  */
-class Footer extends Component {
+export class Footer extends Component {
   /**
   * Render component
   * @return {Object} component - returns a component

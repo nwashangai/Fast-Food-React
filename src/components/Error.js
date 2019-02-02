@@ -5,7 +5,7 @@ import React, { Component } from 'react';
  * @class ErrorPage
  * @description handle ErrorPage component
  */
-class ErrorPage extends Component {
+export class ErrorPage extends Component {
   /**
   * Render component
   * @return {Object} component - returns a component

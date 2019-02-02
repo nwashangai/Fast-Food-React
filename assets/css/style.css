@@ -121,6 +121,10 @@
             color: black;
         }
 
+        .menu-data {
+          display: none;
+        }
+
         .login {
             padding-right: 5px;
         }
@@ -278,6 +282,10 @@
              margin-left: 10px;
         }
 
+        #bar {
+          display: none;
+        }
+
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -331,6 +339,11 @@
         /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 
         @media screen and (max-width: 800px) {
+            #bar {
+              display: inline;
+              left: 0;
+              top: 0;
+            }
             .footer {
                 position: inherit;
             }
@@ -345,8 +358,43 @@
                 width: 100%;
                 padding: 0;
             }
-            .topnav .login {
-                padding-right: 15%;
+
+            .hide {
+              display: none !important;
+            }
+            .leftcolumn {
+              display: none;
+            }
+            .ƒ .login {
+              padding-right: 15%;
+              padding-top: 25%;
+            }
+            .login {
+              background: url('../images/burrito-chicken.jpg');
+              display: none;
+              padding-top: 37% !important;
+              padding-bottom: 37%;
+            }
+            .menu-data {
+              display: none;
+              margin-top: 20%;
+            }
+            .menu-data > li {
+              float: left;
+              display: block;
+              color: #f2f2f2;
+              text-align: left;
+              padding: 10px 16px;
+              padding-left: 15px;
+              font-weight: bold;
+              text-decoration: none;
+              font-size: 17px;
+              width: 100%;
+            }
+            .selected:hover {
+              background-color: #ddd;
+              color: black;
+              cursor: pointer;
             }
             #signup {
                 text-align: center;
@@ -360,10 +408,14 @@
             }
             .my-login>input[type="email"],
             .my-login>input[type="password"] {
-                margin-top: 4%;
+                margin-top: 10%;
                 width: 100%;
-                height: 30px;
+                height: 45px;
                 margin-left: auto;
+            }
+            input[type="button"] {
+              margin-top: 10% !important;
+              height: 45px !important;
             }
             #overlay {
                 padding-right: 0%;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from "../components/home";
+import HomeComponent from "../components/home";
 import User from "../components/user";
-import ErrorPage from "../components/Error";
+import ErrorPageComponent from "../components/Error";
 
 /**
  * @description Request to the  API to signup a user
@@ -12,9 +12,10 @@ import ErrorPage from "../components/Error";
 const Routes = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={Home}></Route>
+      <Route exact path="/" component={HomeComponent}></Route>
       <Route exact path="/user" component={User}></Route>
-      <Route exact path="*" component={ErrorPage}></Route>
+      <Route exact path="/orders" component={User}></Route>
+      <Route exact path="*" component={ErrorPageComponent}></Route>
     </Switch>
   </Router>
 );

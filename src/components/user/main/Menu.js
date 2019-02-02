@@ -11,7 +11,7 @@ import { addItem, update } from "../../../actions/catAction";
  * @class Menu
  * @description handle Menu component
  */
-class Menu extends Component {
+export class Menu extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
@@ -39,7 +39,6 @@ class Menu extends Component {
    * @memberof Menu
    */
   fallBack = event => {
-    console.log(event.src);
     event.src = fallback;
   };
 

@@ -77,8 +77,10 @@ export const login = userData => async dispatch => {
  * @return {object} redux action dispatched
  */
 export const logout = () => dispatch => {
+  window.localStorage.removeItem("user-cart");
   window.localStorage.removeItem("token-key");
   dispatch(logoutUser());
+  window.location.reload();
 };
 
 /**

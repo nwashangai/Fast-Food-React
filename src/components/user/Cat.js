@@ -10,7 +10,7 @@ import { update, clearCat } from "../../actions/catAction";
  * @class Cat
  * @description handle Cat component
  */
-class Cat extends Component {
+export class Cat extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
@@ -55,6 +55,7 @@ class Cat extends Component {
               />
               <input
                 type="button"
+                id="make-order"
                 onClick={() => this.makeOrder()}
                 className="order"
                 value="Order"

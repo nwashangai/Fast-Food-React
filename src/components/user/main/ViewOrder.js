@@ -10,7 +10,7 @@ import Utilities from "../../../utils";
  * @class ViewOrder
  * @description handle Header component
  */
-class ViewOrder extends Component {
+export class ViewOrder extends Component {
   /**
    * Class Constructor
    * @param {Object} props - Props Object
