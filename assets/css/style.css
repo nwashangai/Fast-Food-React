@@ -286,7 +286,7 @@
              margin-left: 10px;
         }
 
-        #bar {
+        #bar, #break-small {
           display: none;
         }
 
@@ -348,6 +348,9 @@
               left: 0;
               top: 0;
             }
+            #break-small {
+              display: inline;
+            }
             .footer {
                 position: inherit;
             }
@@ -380,8 +383,14 @@
               padding-bottom: 37%;
             }
             .menu-data, .tabs {
-              display: none;
+              display: block;
+              height: 0;
+              overflow: hidden;
               margin-top: 20%;
+            }
+
+            .tabs.show-nav, .menu-data.show-nav {
+              height: auto;
             }
             .menu-data > li, .tabs > li {
               float: left;
