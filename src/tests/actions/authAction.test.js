@@ -1,7 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import fetchMock from 'fetch-mock';
 import { request } from '../../config';
 import {
   login, logout, register, getUser, setUser
@@ -10,6 +9,9 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 jest.setTimeout(30000);
+
+jest.mock('jwt-decode', () => ({
+}));
 
 describe('Test Authentication actions', () => {
   beforeEach(() => {
@@ -20,13 +22,6 @@ describe('Test Authentication actions', () => {
     moxios.uninstall();
   });
 
-  // const expectedData = {
-  //   token: 'hbkaljgv;abvljkfb;najfk;ndbsabvjsavmnljadnf;',
-  //   name: 'young'
-  // };
-  const jwtDecode = jest.fn(() => ({
-    isAdmin: true
-  }));
   const action = {
     type: 'ADD_USER',
     payload: { name: 'young' }

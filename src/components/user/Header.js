@@ -25,11 +25,7 @@ export class Header extends Component {
   }
 
   toggleBar = () => {
-    if (this.menuHide.current.style.display === "none") {
-      this.menuHide.current.style.display = "block";
-    } else {
-      this.menuHide.current.style.display = "none";
-    }
+    this.menuHide.current.classList.toggle('show-nav');
   }
 
   /**

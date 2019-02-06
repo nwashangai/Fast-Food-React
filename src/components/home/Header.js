@@ -44,21 +44,17 @@ export class Header extends Component {
   }
 
   toggleBar = () => {
-    if (this.menuHide.current.style.display === "none") {
-      this.menuHide.current.style.display = "block";
-    } else {
-      this.menuHide.current.style.display = "none";
-    }
+    this.menuHide.current.classList.toggle('show-nav');
   }
 
   loginUser = () => {
-    this.menuHide.current.style.display = "none";
+    this.menuHide.current.classList.toggle('show-nav');
     this.props.toggleReg(false);
     this.hideLogin.current.style.display = "block";
   }
 
   signup = () => {
-    this.menuHide.current.style.display = "none";
+    this.menuHide.current.classList.toggle('show-nav');
     this.hideLogin.current.style.display = "none";
     this.props.toggleReg(true);
   }
@@ -112,6 +108,7 @@ export class Header extends Component {
           ></i>
           {' '}Fast Food Fast
         </h1>
+        <br id="break-small"/>
         <ul className="menu-data" ref={this.menuHide}>
           <li
             className="selected"
