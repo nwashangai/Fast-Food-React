@@ -4,10 +4,11 @@ import { shallow } from 'enzyme';
 import { Header } from '../../../components/home/Header';
 
 describe('Test to successfully render <Header />', () => {
+  const spyFn = jest.fn(() => Promise.resolve({
+    status: 'error',
+  }));
   const propsOgj = {
-    login: jest.fn((data) => {
-      'success';
-    }),
+    login: spyFn,
     toggleReg: jest.fn()
   };
   const event = {
@@ -38,12 +39,12 @@ describe('Test to successfully render <Header />', () => {
     wrapper.find('#lpassword').simulate('change', event2);
   });
 
-  it('Should check for click event', () => {
-    // jest.spyOn(Header.prototype, 'menuHide').mockImplementationOnce(() => ({
-    //   current: {
-    //     style: {}
-    //   }
-    // }));
-    // wrapper.find('#login-toggle').simulate('click');
+  it('Should check for click event', async () => {
+    const event = {
+      preventDefault: jest.fn()
+    };
+    wrapper.find('#login-click').simulate('click', event);
+    wrapper.instance().handleSubmit(event);
+    expect(event.preventDefault).toHaveBeenCalled();
   });
 });

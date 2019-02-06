@@ -77,7 +77,7 @@ export class Header extends Component {
           toast(response.message);
         } else {
           Utilities.loader("none");
-          this.props.history.push('/user');
+          this.props.history.push('/food');
         }
       } catch (error) {
         Utilities.loader("none");

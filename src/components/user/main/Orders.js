@@ -88,7 +88,7 @@ export class Order extends Component {
                 <div className="table-body-cell cell-14">
                   <span className="small-display"> Food: </span>
                   <span
-                    className="data clickable"
+                    className="data clickable small-button"
                     onClick={() => this.viewFoodItems(element.id)}
                   >
                     View items
@@ -98,7 +98,7 @@ export class Order extends Component {
                   {element.status === "proccessing" ? (
                     <span className="waiting">Proccessing..</span>
                   ) : element.status === "new" ? (
-                    <span className="waiting">Waiting..</span>
+                    <span className="waiting">Pending..</span>
                   ) : element.status === "cancelled" ? (
                     <span className="declined">Declined</span>
                   ) : (

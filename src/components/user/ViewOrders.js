@@ -8,22 +8,21 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
-import { logout, getUser } from "../../actions/authAction";
+import { logout } from "../../actions/authAction";
 import AlertComponent from "../Alert";
 import HeaderComponent from "./Header";
 import PlaceOrderComponent from "./PlaceOrder";
 import FooterComponent from "../home/Footer";
 import CatComponent from "./Cat";
 import ProfileComponent from "./Profile";
-import MainComponent from "./main";
-import Utilities from "../../utils";
+import OrderComponent from "./main/OrderView";
 
 /**
  * Class representing Users
  * @class User
  * @description user component
  */
-export class User extends Component {
+export class ViewOrders extends Component {
 /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -31,12 +30,11 @@ export class User extends Component {
  */
   constructor(props) {
     super(props);
-    if (!window.localStorage.getItem('token-key')) {
+    if (!localStorage.getItem('token-key')) {
       props.history.push('/');
     } else {
       try {
-        jwtDecode(window.localStorage.getItem('token-key'));
-        this.props.getUser();
+        jwtDecode(localStorage.getItem('token-key'));
       } catch (error) {
         props.logout();
         props.history.push('/');
@@ -53,22 +51,10 @@ export class User extends Component {
   * @return {Object} null - returns notthing
   * @memberof User
  */
-  componentDidMount() {
-    const path = this.props.location.pathname;
-    if (path === '/orders') {
-      Utilities.selectTab('order-content');
-      document.getElementById('order-content').style.display = 'block';
-      document.getElementById('order-tab').className += ' active';
-      this.setState({ init: true });
-    } else {
-      Utilities.selectTab('food-tab');
-      document.getElementById('food-content').style.display = 'block';
-      document.getElementById('food-tab').className += ' active';
-      this.setState({ init: true });
-    }
-    if (path !== this.state.page) {
-      this.setState({ page: path }, this.forceUpdate());
-    }
+  componentDidMount = () => {
+    document.getElementById('order-content').style.display = 'block';
+    document.getElementById('order-tab').classList.add('active');
+    document.getElementById("food-tab").classList.remove('active');
   }
 
   /**
@@ -83,7 +69,7 @@ export class User extends Component {
         <section id="main">
           <div className="container">
             {(this.props.user.isAdmin) ? <ProfileComponent/> : <CatComponent/>}
-            <MainComponent/>
+            <OrderComponent/>
           </div>
         </section>
         <PlaceOrderComponent/>
@@ -95,10 +81,9 @@ export class User extends Component {
     );
   }
 }
-User.propTypes = {
+ViewOrders.propTypes = {
   user: PropTypes.object,
   logout: PropTypes.func.isRequired,
-  getUser: PropTypes.func.isRequired,
   history: PropTypes.object,
   location: PropTypes.object
 };
@@ -106,4 +91,4 @@ const mapStateToProps = (state) => ({
   user: state.AuthReducer.user,
 });
 
-export default withRouter(connect(mapStateToProps, { logout, getUser })(User));
+export default withRouter(connect(mapStateToProps, { logout })(ViewOrders));

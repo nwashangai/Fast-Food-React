@@ -6,14 +6,13 @@ import { withRouter } from 'react-router-dom';
 import Utilities from '../../../utils';
 import { menu } from '../../../actions/foodAction';
 import MenuComponent from "./Menu";
-import Orders from "./Orders";
 
 /**
  * Class representing Main
  * @class Main
  * @description handle Main component
  */
-export class Main extends Component {
+export class MenuView extends Component {
   /**
   * Class Constructor
   * @param {Object} props - Props Object
@@ -109,12 +108,11 @@ export class Main extends Component {
          </h1>
          <MenuComponent menuList={this.state.list || []}/>
        </div>
-       <Orders/>
      </article>
    );
  }
 }
-Main.propTypes = {
+MenuView.propTypes = {
   menu: PropTypes.func.isRequired,
   menuItem: PropTypes.array,
   history: PropTypes.object
@@ -124,4 +122,4 @@ const mapStateToProps = (state) => ({
   menuItem: state.FoodReducer,
 });
 
-export default withRouter(connect(mapStateToProps, { menu })(Main));
+export default withRouter(connect(mapStateToProps, { menu })(MenuView));

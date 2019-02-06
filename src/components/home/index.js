@@ -30,7 +30,7 @@ export class Home extends Component {
       toggle: true
     };
     if (window.localStorage.getItem('token-key')) {
-      props.history.push('/user');
+      props.history.push('/food');
     }
   }
 

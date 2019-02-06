@@ -4,6 +4,10 @@ import { shallow } from 'enzyme';
 import { Header } from '../../../components/user/Header';
 
 describe('Test to successfully render <Header />', () => {
+  localStorage.setItem('user', JSON.stringify({
+    name: 'john',
+    phone: '08012345678'
+  }));
   const propsOgj = {
     logout: jest.fn(),
     user: {

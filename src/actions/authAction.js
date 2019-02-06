@@ -35,7 +35,9 @@ export const register = userData => async dispatch => {
     } else {
       const { token } = response.data.data;
       localStorage.setItem('token-key', token);
+      const res = await request.get('user');
       const user = jwtDecode(token);
+      localStorage.setItem('user', JSON.stringify(res.data.data));
       response.data.isAdmin = user.isAdmin;
       dispatch(setUser(response.data.data));
       return response.data;
@@ -63,6 +65,7 @@ export const login = userData => async dispatch => {
       localStorage.setItem('token-key', token);
       const res = await request.get('user');
       const decoded = jwtDecode(token);
+      localStorage.setItem('user', JSON.stringify(res.data.data));
       dispatch(getOrders(decoded.userId));
       res.data.data.isAdmin = decoded.isAdmin;
       res.data.data.id = decoded.userId;
@@ -96,9 +99,7 @@ export const logout = () => dispatch => {
 export const getUser = () => async dispatch => {
   try {
     const res = await request.get('user');
-    const decoded = jwtDecode(localStorage.getItem('token-key'));
     dispatch(setUser(res.data.data));
-    dispatch(getOrders(decoded.userId));
     return ({ status: 'success', message: true });
   } catch (error) {
     return ({
