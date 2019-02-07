@@ -45,5 +45,7 @@ describe('Test to successfully render <Signup />', () => {
 
   it('Should check for click event', () => {
     wrapper.find('#register').simulate('click', event3);
+    wrapper.instance().handleSubmit(event3);
+    expect(event3.preventDefault).toHaveBeenCalled();
   });
 });

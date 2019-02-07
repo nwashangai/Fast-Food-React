@@ -20,8 +20,6 @@ export class Header extends Component {
     super(props);
     this.state = {};
     this.menuHide = React.createRef();
-
-    this.logout = this.logout.bind(this);
   }
 
   toggleBar = () => {
@@ -46,7 +44,6 @@ export class Header extends Component {
    */
   switchTab = (path) => {
     this.props.history.push(path);
-    window.location.reload();
   };
 
   /**
@@ -55,6 +52,7 @@ export class Header extends Component {
    * @memberof Header
    */
   render() {
+    const user = JSON.parse(localStorage.getItem('user'));
     /* eslint-disable no-restricted-globals */
     return (
       <section id="nav-bar">
@@ -64,7 +62,7 @@ export class Header extends Component {
               onClick={() => this.toggleBar()}
               id="bar" className="fa fa-bars"></i>
             {' '} Welcome <span
-              id="user-first-name">{this.props.user.name}</span>!
+              id="user-first-name">{user.name}</span>!
           </h1>
           <form>
             <nav>
@@ -72,7 +70,7 @@ export class Header extends Component {
                 <li
                   id="food-tab"
                   className="tablinks selected"
-                  onClick={() => this.switchTab('/user')}
+                  onClick={() => this.switchTab('/food')}
                 >
                   <i className="fa fa-cutlery" /> Foods
                 </li>

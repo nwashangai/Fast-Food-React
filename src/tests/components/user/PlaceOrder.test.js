@@ -6,6 +6,10 @@ import { PlaceOrder } from '../../../components/user/PlaceOrder';
 import UtilityClass from "../../../utils";
 
 describe('Test to successfully render <PlaceOrder />', () => {
+  localStorage.setItem('user', JSON.stringify({
+    name: 'john',
+    phone: '08012345678'
+  }));
   const propsOgj = {
     user: {
       name: 'Young',
@@ -20,7 +24,8 @@ describe('Test to successfully render <PlaceOrder />', () => {
       value: '58 ikeja road'
     },
   };
-  let wrapper = shallow(<PlaceOrder {...propsOgj}/>);
+  const wrapper = shallow(<PlaceOrder {...propsOgj}/>);
+
   it('renders the <PlaceOrder /> components', () => {
     expect(wrapper.length).toBe(1);
     expect(wrapper.find('#order-food').length).toBe(1);

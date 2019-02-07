@@ -53,7 +53,7 @@ export const getOrders = (id) => async dispatch => {
       return response.data;
     } else {
       dispatch(setOders(response.data.data));
-      return (response.data);
+      return (response.data.data);
     }
   } catch (error) {
     return ({

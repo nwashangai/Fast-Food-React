@@ -76,7 +76,7 @@ export class PlaceOrder extends Component {
    * @memberof Cat
    */
   render() {
-    const { name, phone } = this.props.user,
+    const user = JSON.parse(localStorage.getItem('user')),
       { onChange } = this;
     return (
       <div id="order-food" className="modal">
@@ -92,13 +92,13 @@ export class PlaceOrder extends Component {
                   <div className="order-cell">
                     <span className="order-display">Name :</span>
                     <span className="order-data" id="user-name">
-                      {name}
+                      {user.name}
                     </span>
                   </div>
                   <div className="order-cell">
                     <span className="order-display">Phone :</span>
                     <span className="order-data" id="user-phone">
-                      {phone}
+                      {user.phone}
                     </span>
                   </div>
                 </div>

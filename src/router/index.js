@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import HomeComponent from "../components/home";
-import User from "../components/user";
+import MenuComponent from "../components/user/ViewMenu";
+import OrderComponent from "../components/user/ViewOrders";
 import ErrorPageComponent from "../components/Error";
 
 /**
@@ -13,8 +14,8 @@ const Routes = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={HomeComponent}></Route>
-      <Route exact path="/user" component={User}></Route>
-      <Route exact path="/orders" component={User}></Route>
+      <Route exact path="/food" component={MenuComponent}></Route>
+      <Route exact path="/orders" component={OrderComponent}></Route>
       <Route exact path="*" component={ErrorPageComponent}></Route>
     </Switch>
   </Router>

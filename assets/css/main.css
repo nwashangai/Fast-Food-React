@@ -540,9 +540,21 @@ ul#food .price {
      padding: 2px;
      padding-left: 15px;
      padding-right: 15px;
-     background: rgb(148, 185, 219);
+     background: #333;
+     border-radius: 5px;
+     border-style: solid;
+     border-width: thin;
+     color: white;
      cursor: pointer;
+     font-weight: bold;
+     padding-top: 6px;
+     padding-bottom: 6px;
  }
+
+ .clickable:hover {
+  background: rgba(16, 16, 16, 0.616);
+ }
+
  .order-display {
      display: block;
      width: 20%;
@@ -700,6 +712,13 @@ ul#food .price {
         text-align: left !important;
         padding-left: 10%;
     }
+
+    .small-button {
+      width: 41% !important;
+      margin-right: 7%;
+      margin-left: 5%
+    }
+
     #table-header {
         display: none;
     }

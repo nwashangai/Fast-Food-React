@@ -31,7 +31,7 @@ describe('Test Authentication actions', () => {
     data: {
       status: 'success',
       data: {
-        token: 'hbkaljgv;abvljkfb;najfk;ndbsabvjsavmnljadnf;',
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjpmYWxzZSwidXNlcklkIjoiMjY4NDhmNmEtODFmYi00MGFhLWExYWMtZWFhMjUwMzAyNjQzIiwiZW1haWwiOiJ5b3VuZ0BnbWFpbC5jb20iLCJpYXQiOjE1NDk0Njg3NTl9.CEspQ9AZPOSq_rBOozBNGWDUV9KwqOJ5CGxGY_E2jeE',
         name: 'young'
       }
     }
@@ -65,10 +65,18 @@ describe('Test Authentication actions', () => {
   it('should get user', async () => {
     const store = mockStore({});
     await store.dispatch(getUser());
-    expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([
+      {
+        payload: {
+          name: "young",
+          token: "hbkaljgv;abvljkfb;najfk;ndbsabvjsavmnljadnf;",
+        },
+        type: "ADD_USER",
+      },
+    ]);
   });
 
-  it('should lout user', async () => {
+  it('should logout user', async () => {
     const store = mockStore({});
     await store.dispatch(logout());
     expect(store.getActions()).toEqual([{ type: "LOGOUT", }]);

@@ -14,4 +14,9 @@ describe('Test to successfully render <Home />', () => {
     expect(wrapper.length).toBe(1);
     expect(wrapper.find('div').length).toBe(1);
   });
+  it('Should check for click event', () => {
+    const data = true;
+    wrapper.instance().toggleReg(data);
+    expect(data).toBe(true);
+  });
 });
