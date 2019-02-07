@@ -62,7 +62,7 @@ export class Signup extends Component {
           toast(response.message);
         } else {
           Utilities.loader("none");
-          this.props.history.push('/food');
+          this.props.history.push('/menu');
         }
       } catch (error) {
         Utilities.loader("none");

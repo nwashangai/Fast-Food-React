@@ -21,7 +21,7 @@ describe('Test to successfully render <Main />', () => {
   it('renders the <MenuView /> components', () => {
     expect(wrapper.length).toBe(1);
     expect(wrapper.find('#main-col').length).toBe(1);
-    expect(wrapper.find('#new').at(0).length).toBe(1);
+    expect(wrapper.find('#new-title').at(0).length).toBe(1);
   });
 
   it('Should check the filter changed input field for change', () => {

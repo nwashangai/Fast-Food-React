@@ -66,7 +66,6 @@ export const login = userData => async dispatch => {
       const res = await request.get('user');
       const decoded = jwtDecode(token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
-      dispatch(getOrders(decoded.userId));
       res.data.data.isAdmin = decoded.isAdmin;
       res.data.data.id = decoded.userId;
       res.data.data.token = token;
@@ -86,8 +85,9 @@ export const login = userData => async dispatch => {
  * @return {object} redux action dispatched
  */
 export const logout = () => dispatch => {
-  window.localStorage.removeItem("user-cart");
-  window.localStorage.removeItem("token-key");
+  window.localStorage.removeItem('user-cart');
+  window.localStorage.removeItem('token-key');
+  window.localStorage.removeItem('user');
   dispatch(logoutUser());
   window.location.reload();
 };

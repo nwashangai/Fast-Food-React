@@ -289,6 +289,11 @@ article#main-col {
     color: #a33131;
 }
 
+#new-title {
+  font-size: 20px;
+  color: #fcf8f8;
+}
+
 #new-btn {
     border-style: none;
 }
@@ -534,6 +539,10 @@ ul#food .price {
 
   .data-display {
       color: #333
+  }
+
+  .digit > i {
+    color: #a33131;
   }
 
  .clickable {

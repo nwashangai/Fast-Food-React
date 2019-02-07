@@ -70,7 +70,7 @@ export class Header extends Component {
                 <li
                   id="food-tab"
                   className="tablinks selected"
-                  onClick={() => this.switchTab('/food')}
+                  onClick={() => this.switchTab('/menu')}
                 >
                   <i className="fa fa-cutlery" /> Foods
                 </li>

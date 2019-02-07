@@ -95,7 +95,7 @@ export class MenuView extends Component {
      <article id="main-col">
        <div className="tab-contents" id="food-content">
          <h1 className="page-title">
-           <span id="new">Tasty Foods</span>
+           <span id="new-title">Tasty Foods</span>
            <div className="food-category right">
              <select id="category-selected" onChange={this.setCategory}>
                {this.distintOptions()

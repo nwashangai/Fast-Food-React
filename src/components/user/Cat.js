@@ -66,7 +66,7 @@ export class Cat extends Component {
             Foods
             <span className="cart-price">
               <span className="digit">
-                <i className="fa fa-shopping-cart" />
+                <i className="fa fa-money" />
               </span>
             </span>
             <span className="qty">Qty</span>
