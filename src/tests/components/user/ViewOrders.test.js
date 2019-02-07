@@ -17,7 +17,7 @@ describe('Test to successfully render <User />', () => {
       push: jest.fn()
     },
     location: {
-      pathname: '/food'
+      pathname: '/menu'
     }
   };
   sinon.stub(document, 'getElementById').returns({
