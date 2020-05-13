@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import jwtDecode from 'jwt-decode';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import "../../../assets/css/style.css";
 import "../../../assets/css/main.css";
-import { logout } from "../../actions/authAction";
+import { logout, getUser } from "../../actions/authAction";
 import AlertComponent from "../Alert";
 import HeaderComponent from "./Header";
 import PlaceOrderComponent from "./PlaceOrder";
@@ -23,60 +22,62 @@ import MenuComponent from "./main/MenuView";
  * @description user component
  */
 export class ViewMenu extends Component {
-/**
-  * Class Constructor
-  * @param {Object} props - Props Object
-  * @return {null} null - returns nothing
- */
+  /**
+   * Class Constructor
+   * @param {Object} props - Props Object
+   * @return {null} null - returns nothing
+   */
   constructor(props) {
     super(props);
-    if (!localStorage.getItem('token-key')) {
-      props.history.push('/');
+    if (!localStorage.getItem("token-key")) {
+      props.history.push("/");
     } else {
       try {
-        jwtDecode(window.localStorage.getItem('token-key'));
+        this.props.getUser();
+        // const decoded = jwtDecode(window.localStorage.getItem("token-key"));
+        // console.log(this.props.user.isAdmin);
       } catch (error) {
         props.logout();
-        props.history.push('/');
+        props.history.push("/");
       }
     }
     this.state = {
       init: false,
-      page: this.props.location.pathname
+      page: this.props.location.pathname,
     };
   }
 
   /**
-  * execute after load
-  * @return {Object} null - returns notthing
-  * @memberof User
- */
+   * execute after load
+   * @return {Object} null - returns notthing
+   * @memberof User
+   */
   componentDidMount = () => {
-    document.getElementById('food-content').style.display = 'block';
-    document.getElementById('food-tab').classList.add('active');
-    document.getElementById('order-tab').classList.remove('active');
-  }
+    document.getElementById("food-content").style.display = "block";
+    document.getElementById("food-tab").classList.add("active");
+    document.getElementById("order-tab").classList.remove("active");
+  };
 
   /**
-  * Render component
-  * @return {Object} component - returns a component
-  * @memberof User
- */
+   * Render component
+   * @return {Object} component - returns a component
+   * @memberof User
+   */
   render() {
     return (
       <div>
-        <HeaderComponent/>
+        <HeaderComponent />
         <section id="main">
           <div className="container">
-            {(this.props.user.isAdmin) ? <ProfileComponent/> : <CatComponent/>}
-            <MenuComponent/>
+            {this.props.user.isAdmin ? <ProfileComponent /> : <CatComponent />}
+            <MenuComponent />
           </div>
         </section>
-        <PlaceOrderComponent/>
+        <PlaceOrderComponent />
         <div id="loader"></div>
-        <AlertComponent/>
-        <FooterComponent/>
-        <ToastContainer/>
+        <AlertComponent />
+        <FooterComponent />
+        <ToastContainer />
       </div>
     );
   }
@@ -84,11 +85,15 @@ export class ViewMenu extends Component {
 ViewMenu.propTypes = {
   user: PropTypes.object,
   logout: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
+
 const mapStateToProps = (state) => ({
   user: state.AuthReducer.user,
 });
 
-export default withRouter(connect(mapStateToProps, { logout })(ViewMenu));
+export default withRouter(
+  connect(mapStateToProps, { logout, getUser })(ViewMenu)
+);

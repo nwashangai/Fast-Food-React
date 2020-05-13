@@ -1,17 +1,16 @@
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
-import { getOrders } from './orderAction';
-import { request } from '../config';
-import { ADD_USER, LOGOUT } from '../types';
+import { request } from "../config";
+import { ADD_USER, LOGOUT } from "../types";
 
 /**
  * @description set User
  * @param {object} user - user information
  * @return {object} redux action dispatched
  */
-export const setUser = user => ({
+export const setUser = (user) => ({
   type: ADD_USER,
-  payload: user
+  payload: user,
 });
 
 /**
@@ -27,26 +26,26 @@ export const logoutUser = () => ({
  * @param {object} userData - user data
  * @return {object} response object
  */
-export const register = userData => async dispatch => {
+export const register = (userData) => async (dispatch) => {
   try {
-    const response = await request.post('auth/signup', userData);
-    if (response.data.status === 'error') {
+    const response = await request.post("auth/signup", userData);
+    if (response.data.status === "error") {
       return response.data;
     } else {
       const { token } = response.data.data;
-      localStorage.setItem('token-key', token);
-      const res = await request.get('user');
+      localStorage.setItem("token-key", token);
+      const res = await request.get("user");
       const user = jwtDecode(token);
-      localStorage.setItem('user', JSON.stringify(res.data.data));
+      localStorage.setItem("user", JSON.stringify(res.data.data));
       response.data.isAdmin = user.isAdmin;
       dispatch(setUser(response.data.data));
       return response.data;
     }
   } catch (error) {
-    return ({
-      status: 'error',
-      message: error.response ? error.response.data.message : error.message
-    });
+    return {
+      status: "error",
+      message: error.response ? error.response.data.message : error.message,
+    };
   }
 };
 
@@ -55,17 +54,17 @@ export const register = userData => async dispatch => {
  * @param {object} userData - user data
  * @return {object} response object
  */
-export const login = userData => async dispatch => {
+export const login = (userData) => async (dispatch) => {
   try {
-    const response = await request.post('auth/login', userData);
-    if (response.data.status === 'error') {
+    const response = await request.post("auth/login", userData);
+    if (response.data.status === "error") {
       return response.data;
     } else {
       const { token } = response.data;
-      localStorage.setItem('token-key', token);
-      const res = await request.get('user');
+      localStorage.setItem("token-key", token);
+      const res = await request.get("user");
       const decoded = jwtDecode(token);
-      localStorage.setItem('user', JSON.stringify(res.data.data));
+      localStorage.setItem("user", JSON.stringify(res.data.data));
       res.data.data.isAdmin = decoded.isAdmin;
       res.data.data.id = decoded.userId;
       res.data.data.token = token;
@@ -73,10 +72,10 @@ export const login = userData => async dispatch => {
       return res.data;
     }
   } catch (error) {
-    return ({
-      status: 'error',
-      message: error.response ? error.response.data.message : error.message
-    });
+    return {
+      status: "error",
+      message: error.response ? error.response.data.message : error.message,
+    };
   }
 };
 
@@ -84,27 +83,27 @@ export const login = userData => async dispatch => {
  * Logout User
  * @return {object} redux action dispatched
  */
-export const logout = () => dispatch => {
-  window.localStorage.removeItem('user-cart');
-  window.localStorage.removeItem('token-key');
-  window.localStorage.removeItem('user');
+export const logout = () => (dispatch) => {
+  window.localStorage.removeItem("user-cart");
+  window.localStorage.removeItem("token-key");
+  window.localStorage.removeItem("user");
   dispatch(logoutUser());
-  window.location.reload();
 };
 
 /**
  * Get User
  * @return {object} redux action dispatched
  */
-export const getUser = () => async dispatch => {
+export const getUser = () => async (dispatch) => {
   try {
-    const res = await request.get('user');
-    dispatch(setUser(res.data.data));
-    return ({ status: 'success', message: true });
+    const res = await request.get("user");
+    const decoded = jwtDecode(window.localStorage.getItem("token-key"));
+    dispatch(setUser({ ...res.data.data, isAdmin: decoded.isAdmin }));
+    return { status: "success", message: true };
   } catch (error) {
-    return ({
-      status: 'error',
-      message: error.response ? error.response.data.message : error.message
-    });
+    return {
+      status: "error",
+      message: error.response ? error.response.data.message : error.message,
+    };
   }
 };

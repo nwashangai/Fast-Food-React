@@ -45,7 +45,7 @@ export class Home extends Component {
  */
   render() {
     return (
-      <div>
+      <div className="landing-page">
         <HeaderComponent toggleReg={this.toggleReg}/>
         <SignupComponent toggle={this.state.toggle}/>
         <AlertComponent/>

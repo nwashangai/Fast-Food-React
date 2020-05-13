@@ -1,4 +1,4 @@
-import { ADD_USER } from '../types';
+import { ADD_USER } from "../types";
 
 const initialState = {
   user: {},
@@ -12,10 +12,10 @@ const initialState = {
  */
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
-  case ADD_USER:
-    return { ...state, user: action.payload };
-  default:
-    return state;
+    case ADD_USER:
+      return { ...state, user: action.payload };
+    default:
+      return state;
   }
 };
 export default AuthReducer;
